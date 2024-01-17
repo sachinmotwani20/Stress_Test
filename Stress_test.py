@@ -14,7 +14,7 @@ from torch.utils.data.sampler import SubsetRandomSampler
 
 
 # Device configuration
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 def data_loader(data_dir,
                 batch_size,
@@ -135,7 +135,7 @@ class VGG11(nn.Module):
 
 num_classes = 100
 num_epochs = 500000
-batch_size = 16
+batch_size = 64
 learning_rate = 0.005
 
 model = VGG11(3,num_classes).to(device)
@@ -168,9 +168,9 @@ for epoch in range(num_epochs):
         optimizer.step()
         
     end = time.time()
-    # print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}' 
-    #                .format(epoch+1, num_epochs, i+1, total_step, loss.item()))
-    # print('Time for this Epoch:', end-start)
+    print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}' 
+                   .format(epoch+1, num_epochs, i+1, total_step, loss.item()))
+    print('Time for this Epoch:', end-start)
             
     # Validation
     with torch.no_grad():
