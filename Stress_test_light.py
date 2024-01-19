@@ -32,13 +32,13 @@ class StressTestModel(nn.Module):
 
 def run_gpu_stress_test(model, device, num_iterations=10000000000):
     # Move model to the specified device
-    model.to(device)
+    model = model.to(device)
 
     # Dummy input tensor (replace with your actual input size)
-    input_tensor = torch.randn(50000, 1000).to(device)
+    input_tensor = torch.randn(500000, 1000).to(device)
 
     # Dummy target tensor (replace with your actual target size)
-    target_tensor = torch.randn(50000, 1).to(device)
+    target_tensor = torch.randn(500000, 1).to(device)
 
     # Define loss and optimizer
     criterion = nn.MSELoss()
@@ -72,6 +72,9 @@ if __name__ == "__main__":
 
     # Specify the GPU device (e.g., 'cuda:0')
     gpu_device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+    gpu_device = torch.device(gpu_device)
+    print(gpu_device)
 
     # Run stress test on the GPU
+    print('Running stress test')
     run_gpu_stress_test(stress_test_model, gpu_device)
