@@ -3,7 +3,7 @@ This repository is designed for taking stess test on any  GPU machine.
 
 Enviornment setup:
 
-`conda create -n env python-3.10`
+`conda create -n env python=3.10`
 
 `conda activate env`
 
